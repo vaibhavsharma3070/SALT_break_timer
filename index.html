@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mindful Break Timer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Lora:ital,wght@0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <header>
+      <h1>mindful break</h1>
+    </header>
+
+    <main>
+      <div class="mode-label" id="modeLabel">work session</div>
+
+      <div class="timer-ring">
+        <svg viewBox="0 0 200 200" class="ring-svg">
+          <circle class="ring-bg" cx="100" cy="100" r="88" />
+          <circle class="ring-progress" id="ringProgress" cx="100" cy="100" r="88" />
+        </svg>
+        <div class="timer-display" id="timerDisplay">25:00</div>
+      </div>
+
+      <div class="suggestion-box" id="suggestionBox" hidden>
+        <span class="suggestion-icon">🌿</span>
+        <p id="suggestionText"></p>
+      </div>
+
+      <div class="controls">
+        <button id="btnStartPause" class="btn btn-primary">Start</button>
+        <button id="btnReset" class="btn btn-ghost">Reset</button>
+      </div>
+
+      <div class="duration-controls">
+        <label>
+          Work <input type="number" id="workDuration" value="25" min="1" max="99" /> min
+        </label>
+        <label>
+          Break <input type="number" id="breakDuration" value="5" min="1" max="30" /> min
+        </label>
+      </div>
+    </main>
+
+    <section class="history">
+      <h2>Sessions today <span id="sessionCount" class="count-badge">0</span></h2>
+      <ul id="sessionList"></ul>
+    </section>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
