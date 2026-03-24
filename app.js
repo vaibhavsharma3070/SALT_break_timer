@@ -1,6 +1,7 @@
 // ── Config ────────────────────────────────────────────────────────────────────
 const STORAGE_KEY       = 'mindful_sessions';
 const TIMER_STATE_KEY   = 'mindful_timer_state';
+const BG_KEY = 'mindful_bg_image';
 
 const SUGGESTIONS = [
   'Close your eyes and take five slow, deep breaths.',
@@ -32,6 +33,9 @@ const workInput     = document.getElementById('workDuration');
 const breakInput    = document.getElementById('breakDuration');
 const sessionList   = document.getElementById('sessionList');
 const sessionCount  = document.getElementById('sessionCount');
+const bgLayer = document.getElementById('bgLayer');
+const bgInput = document.getElementById('bgInput');
+const btnBg   = document.getElementById('btnBg');
 
 const CIRCUMFERENCE = 2 * Math.PI * 88; // r=88 → ≈ 553
 
@@ -186,8 +190,48 @@ breakInput.addEventListener('change', () => {
   if (!running && mode === 'break') initTimer();
 });
 
+function applyBg(dataUrl) {
+  bgLayer.style.backgroundImage = `url(${dataUrl})`;
+  bgLayer.classList.add('has-image');
+  document.body.classList.add('has-bg');
+}
+
+function clearBg() {
+  localStorage.removeItem(BG_KEY);
+  bgLayer.style.backgroundImage = '';
+  bgLayer.classList.remove('has-image');
+  document.body.classList.remove('has-bg');
+}
+
+// Eventlisteners
+btnBg.addEventListener('click', () => {
+  if (bgLayer.classList.contains('has-image')) {
+    if (confirm('Clear background image?')) clearBg();
+  } else {
+    bgInput.click();
+  }
+});
+
+bgInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    const dataUrl = ev.target.result;
+    localStorage.setItem(BG_KEY, dataUrl);
+    applyBg(dataUrl);
+  };
+  reader.readAsDataURL(file);
+  bgInput.value = '';
+});
+
 // ── Boot ──────────────────────────────────────────────────────────────────────
 function boot() {
+  function loadBg() {
+    const saved = localStorage.getItem(BG_KEY);
+    if (saved) applyBg(saved);
+  }
+  loadBg();
   requestNotificationPermission();
   let restored = false;
   try {

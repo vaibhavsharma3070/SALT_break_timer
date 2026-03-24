@@ -229,3 +229,59 @@ header h1 {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.bg-layer.has-image { opacity: 1; }
+
+.app { position: relative; z-index: 1; }
+
+body.has-bg main,
+body.has-bg .history,
+body.has-bg header {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+body.has-bg,
+body.has-bg .mode-label,
+body.has-bg .timer-display,
+body.has-bg #suggestionText,
+body.has-bg .history h2,
+body.has-bg #sessionList li,
+body.has-bg .duration-controls,
+body.has-bg header h1 {
+  color: #fff;
+}
+
+body.has-bg .ring-bg { stroke: rgba(255,255,255,0.2); }
+body.has-bg .count-badge { background: rgba(255,255,255,0.25); color: #fff; }
+body.has-bg #sessionList li { background: rgba(255,255,255,0.1); border-left-color: rgba(255,255,255,0.3); }
+body.has-bg .duration-controls input { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #fff; }
+body.has-bg .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.4); }
+body.has-bg .suggestion-box { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
+
+.btn-bg {
+  position: absolute;
+  top: 0.5rem;
+  right: 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.btn-bg:hover { background: var(--surface); }
