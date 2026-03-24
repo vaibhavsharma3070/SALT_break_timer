@@ -14,7 +14,7 @@ Requires Python 3.12+
 uv run main.py
 ```
 
-Opens `http://localhost:8000` automatically in your browser. All features work.
+Opens `http://localhost:8001` automatically in your browser. All features work.
 
 If you don't have `uv`:
 ```bash
